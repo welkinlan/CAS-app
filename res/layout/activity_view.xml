@@ -1,0 +1,230 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_bg"
+    android:orientation="horizontal"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context=".ViewActivity" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:layout_centerHorizontal="true"
+        android:padding="0dp" >
+
+        <com.cas.utility.CoverFlow
+            xmlns:coverflow="http://schemas.android.com/apk/res/com.example.cas"
+            android:id="@+id/coverflowReflect"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            coverflow:imageHeight="300dp"
+            coverflow:imageReflectionRatio="0.2"
+            coverflow:imageWidth="300dp"
+            coverflow:reflectionGap="2dp"
+            coverflow:withReflection="true" />
+
+        <TextView
+            android:id="@+id/stimuliText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#88000000"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp" />
+
+        <ImageView
+            android:id="@+id/swipe_done"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="460dp"
+            android:layout_marginTop="130dp"
+            android:src="@drawable/check_mark"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_centerHorizontal="true"
+        android:background="#E0E0E0"
+        android:padding="5dp" >
+
+        <RelativeLayout
+            android:id="@+id/record_layout"
+            android:layout_width="400dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/button_record"
+                android:layout_width="124dp"
+                android:layout_height="124dp"
+                android:background="@drawable/recordh"
+                android:clickable="false" />
+
+            <Button
+                android:id="@+id/button_stop"
+                android:layout_width="124dp"
+                android:layout_height="124dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/button_record"
+                android:background="@drawable/stoph"
+                android:clickable="false" />
+
+            <Button
+                android:id="@+id/button_play"
+                android:layout_width="124dp"
+                android:layout_height="124dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/button_stop"
+                android:background="@drawable/playh"
+                android:clickable="false" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tabbyLayout"
+            android:layout_width="350dp"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@+id/record_layout" >
+
+            <!--
+             <com.ant.liao.GifView
+                android:id="@+id/tabbyGif"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:enabled="false" />
+            -->
+
+            <TextView
+                android:id="@+id/tabbyText"
+                android:layout_width="250dp"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@+id/tabbyImage"
+                android:gravity="center"
+                android:padding="5dip"
+                android:text="Hello!"
+                android:textSize="25sp"
+                android:typeface="sans" />
+
+            <ImageView
+                android:id="@+id/tabbyImage"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/tabby" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/extraLayout"
+            android:layout_width="100dp"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tabbyLayout"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/goldMedalLayout"
+                android:layout_width="100dp"
+                android:layout_height="78dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/goldMedalView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/gold_medal">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/goldMedalView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/gold_medal">
+                </ImageView>
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:id="@+id/silverMedalLayout"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/silverMedalView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/silver_medal">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/silverMedalView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/silver_medal">
+                </ImageView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fbLayout"
+            android:layout_width="400dp"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/extraLayout"
+            android:orientation="vertical" >
+
+            <GridView
+                android:id="@+id/goldGV"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:columnWidth="20dp"
+                android:numColumns="10" >
+            </GridView>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <GridView
+                android:id="@+id/silverGV"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:columnWidth="20dp"
+                android:numColumns="10" >
+            </GridView>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:baselineAligned="false"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="horizontal"
+    android:showDividers="middle"
+    tools:context=".courseDetailFragment" >
+
+    <LinearLayout
+	    android:id="@+id/hand_point"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/hand_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/hand_left" />
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="20dp"
+	        android:paddingLeft="6px"
+	        android:text="Please choose a category"
+	        android:textSize="30sp"
+	        android:typeface="sans" >
+
+	    </TextView>
+	</LinearLayout> -->
+
+	<ListView 
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:tools="http://schemas.android.com/tools"
+	    android:id="@+id/course_detail"
+	    style="?android:attr/textAppearanceLarge"
+	    android:textColor="#ffffff"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:padding="16dp"
+	    android:textIsSelectable="true"
+    	android:choiceMode="singleChoice"
+	    tools:context=".courseDetailFragment" />
+<!-- 	
+</LinearLayout> -->

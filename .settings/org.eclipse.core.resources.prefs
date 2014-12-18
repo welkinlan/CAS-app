@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/com/cas/activity/GameActivity.java=UTF-8
+encoding//src/com/cas/activity/GameActivityWithAnimation.java=UTF-8
+encoding//src/com/cas/activity/ViewActivity.java=UTF-8
+encoding//src/com/cas/activity/WifiWatchdogService.java=UTF-8
+encoding//src/com/cas/audio_process/RecordTask.java=UTF-8
+encoding//src/com/cas/fragment/courseListActivity.java=UTF-8
+encoding//src/com/cas/server/BackgroundSync.java=UTF-8
+encoding//src/com/cas/utility/AudioRecorder.java=UTF-8
+encoding//src/com/cas/utility/CardView.java=UTF-8
+encoding//src/com/cas/utility/CoverFlow.java=UTF-8
+encoding//src/com/cas/utility/ImageTextItem.java=UTF-8
+encoding//src/com/cas/utility/TurnAnimation.java=UTF-8
