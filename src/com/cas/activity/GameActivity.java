@@ -457,7 +457,7 @@ public class GameActivity extends Activity {
 				//tabbyGif.setGifImageType(GifImageType.COVER);  
 				//tabbyImage.setImageResource(tabbydance);
 				AssetFileDescriptor descriptor = getAssets().openFd(
-						"audio/" + rewardfile + ".wav");
+						"audio/" + rewardfile + ".mp3");
 				rewardPlayer.setDataSource(descriptor.getFileDescriptor(),
 						descriptor.getStartOffset(), descriptor.getLength());
 				descriptor.close();
@@ -1048,7 +1048,7 @@ public class GameActivity extends Activity {
 		// TODO Auto-generated method stub
 		String iname = image_names[position].split("\\.")[0].toString();
 		String aname = iname.replace("-", " ").toLowerCase();
-		Log.i("audio_name", "prompts/" + aname + ".wav");
+		Log.i("audio_name", "prompts/" + aname + ".mp3");
 		// FileInputStream in = null;
 		try {
 			if(promptPlayer != null && promptPlayer.isPlaying()){
@@ -1058,7 +1058,7 @@ public class GameActivity extends Activity {
 		    }
 			promptPlayer = new MediaPlayer();
 			AssetFileDescriptor descriptor = getAssets().openFd(
-					"prompts/" + aname + ".wav");
+					"prompts/" + aname + ".mp3");
 			promptPlayer.setDataSource(descriptor.getFileDescriptor(),
 							descriptor.getStartOffset(),
 							descriptor.getLength());

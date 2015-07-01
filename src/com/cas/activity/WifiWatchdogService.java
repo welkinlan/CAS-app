@@ -61,8 +61,8 @@ public class WifiWatchdogService extends Service {
 								bgSyncer.download();
 								bgSyncer.upload();
 							}
-							// automatically watch for wifi and synchronize every 5 minutes
-							Thread.sleep(5*60*1000);
+							// automatically watch for wifi and synchronize every 1 minute
+							Thread.sleep(1*60*1000);
 							//Thread.sleep(10*1000);
 						} catch (InterruptedException e) {
 							Log.v("error in" + TAG, e.getMessage());

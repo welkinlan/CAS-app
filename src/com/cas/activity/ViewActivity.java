@@ -298,7 +298,7 @@ public class ViewActivity extends Activity {
 
 				String iname = image_names[position].split("\\.")[0].toString();
 				String aname = iname.replace("-", " ").toLowerCase();
-				Log.i("audio_name", "prompts/" + aname + ".wav");
+				Log.i("audio_name", "prompts/" + aname + ".mp3");
 				// FileInputStream in = null;
 				try {
 					if(promptPlayer != null && promptPlayer.isPlaying()){
@@ -308,7 +308,7 @@ public class ViewActivity extends Activity {
 					}
 					promptPlayer = new MediaPlayer();
 					AssetFileDescriptor descriptor = getAssets().openFd(
-							"prompts/" + aname + ".wav");
+							"prompts/" + aname + ".mp3");
 					promptPlayer.setDataSource(descriptor.getFileDescriptor(),
 							descriptor.getStartOffset(), descriptor.getLength());
 					descriptor.close();
