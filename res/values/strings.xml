@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CAS</string>
+    <string name="app_name">Tabby Talks</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="welcome">CAS Therapy App</string>
+    <string name="welcome">Tabby Talks</string>
     <string name="title_course_list">Back to login screen</string>
     <string name="title_course_detail">Course Detail</string>
     <string name="title_activity_game">Back to courses</string>
