@@ -1,3 +1,6 @@
+/*
+ * The flash cards activity for each exercise
+ */
 package com.cas.activity;
 
 import java.io.IOException;
@@ -58,66 +61,137 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ViewActivity.
+ */
 public class ViewActivity extends Activity {
+	
+	/** The global application variable. */
 	Globals app;
+	
+	/** The user. */
 	User user;
+	
+	/** The course. */
 	Course course;
+	
+	/** The module. */
 	Module module;
+	
+	/** The module images. */
 	ArrayList<Content> module_images;
+	
+	/** The random images. */
 	ArrayList<Content> random_images;
+	
+	/** The m animation. */
 	Animation mAnimation;
 
+	/** The prompt name. */
 	String prompt_name = "";
+	
+	/** The current position. */
 	int current_position = 0;
+	
+	/** The current view. */
 	View current_view = null;
-	//int temp_position = 0;
+	
+	/** The variable to check whether the child swipe the flash cards while recording. */
 	int isChange=0;
+	
+	/** The completed list of image id. */
 	ArrayList<Integer> completed_list;
+	
+	/** The uncompleted count. */
 	int uncompleted_count = -1;
 
+	/**  The filename for the image. */
 	private String filename;
+	
+	/** The string format helper. */
 	StringHelper sh = new StringHelper();
 
+	/** The start time for the exercise session. */
 	String start_time;
+	
+	/** The end time for the exercise session. */
 	String end_time;
 
+	/** The golden_star_num. */
 	private int golden_star_num = 0;
+	
+	/** The silver_star_num. */
 	private int silver_star_num = 0;
+	
+	/** The is golden given. */
 	private boolean isSilverGiven = false, isGoldenGiven = false;
-	private static Integer goldenStar = R.drawable.golden_star;
-	private static Integer silverStar = R.drawable.silver_star;
-	private static Integer defaultStar = R.drawable.default_star;
-	private static Integer nextSilverStar = R.drawable.next_silver_star;
-	private static Integer nextGoldenStar = R.drawable.next_golden_star;
-	private Integer recordEn = R.drawable.recordv;
-	private Integer recordUn = R.drawable.recordh;
-	private Integer stopEn = R.drawable.stopv;
-	private Integer stopUn = R.drawable.stoph;
-	private Integer playEn = R.drawable.playv;
-	private Integer playUn = R.drawable.playh;
+	
+	/** The image resources. */
+	private static Integer goldenStar = R.drawable.golden_star, silverStar = R.drawable.silver_star,
+			defaultStar = R.drawable.default_star, nextSilverStar = R.drawable.next_silver_star,
+			nextGoldenStar = R.drawable.next_golden_star, recordEn = R.drawable.recordv,
+			recordUn = R.drawable.recordh, stopEn = R.drawable.stopv, stopUn = R.drawable.stoph,
+			playEn = R.drawable.playv, playUn = R.drawable.playh;
+	
+	/** The state of recording. */
 	private final int FREE = 0, READY_FOR_RECORD = 1, RECORDING = 2,
 			RECORD_END = 3, PLAYING = 4, PLAY_END = 5;
+	
+	/** The current state. */
 	private int state = FREE;
+	
+	/** The image names. */
 	private String[] image_names;
 
+	/** The stimuli text. */
 	private TextView stimuliText;
+	
+	/** The image views. */
 	private ImageView doneSign, goldMedalView1, goldMedalView2, silverMedalView1, silverMedalView2;
+	
+	/** The buttons. */
 	private Button b_record, b_stop, b_play;
+	
+	/** The golden/silver gridview. */
 	private static GridView goldGV, silverGV;
+	
+	/** The silver adapter. */
 	private StarGVAdapter goldAdapter, silverAdapter;
+	
+	/** The cover image adapter. */
 	private BaseAdapter coverImageAdapter;
+	
+	/** The recorder. */
 	private AudioRecorder recorder;
+	
+	/** The media player. */
 	private MediaPlayer mediaPlayer;
+	
+	/** The prompt player. */
 	private MediaPlayer promptPlayer;
+	
+	/** The reflecting cover flow. */
 	CoverFlow reflectingCoverFlow;
 
+	/** The alpha animation. */
 	private Animation alphaAnimation;
+	
+	/** The scale animation. */
 	private Animation scaleAnimation;
+	
+	/** The set. */
 	private AnimationSet set;
 
+	/** The record timer. */
 	Timer recordTimer;
+	
+	/** The recording seconds. */
 	int recordingSeconds;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -133,6 +207,9 @@ public class ViewActivity extends Activity {
 		startExerciseTime();
 	}
 
+	/**
+	 * Load the images in random/original order.
+	 */
 	private void load() {
 		// TODO Auto-generated method stub
 		module_images = module.getContents();
@@ -154,14 +231,11 @@ public class ViewActivity extends Activity {
 		}
 		else{
 			//random images
-
 			random_images = new ArrayList<Content>(num_images);
 			for (int i = 0; i < num_images; i++) {
 				random_images.add(null);
 			}
-
 			image_names = new String[num_images];
-
 			// According to image numbers
 			try {
 				ArrayList<Integer> list = new ArrayList<Integer>(num_images);
@@ -191,6 +265,11 @@ public class ViewActivity extends Activity {
 		uncompleted_count = num_images;
 	}
 
+	/**
+	 * Checks if this exercise is a transition exercise.
+	 *
+	 * @return true, if is transition
+	 */
 	private boolean isTransition() {
 		// TODO Auto-generated method stub
 		if(module_images.get(0).getTransition()==null || module_images.get(0).getTransition().equals("0")){
@@ -199,6 +278,12 @@ public class ViewActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Checks if the image is existed in the repository.
+	 *
+	 * @param name the name
+	 * @return true, if is exist image
+	 */
 	private boolean isExistImage(String name) {
 		// TODO Auto-generated method stub
 		InputStream in = null;
@@ -212,6 +297,9 @@ public class ViewActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Initialize the views in the scene.
+	 */
 	private void setViews() {
 		// TODO Auto-generated method stub
 		stimuliText = (TextView) findViewById(R.id.stimuliText);
@@ -265,6 +353,11 @@ public class ViewActivity extends Activity {
 		setAnimation();
 	}
 
+	/**
+	 * Sets up cover flow.
+	 *
+	 * @param reflect the new up cover flow
+	 */
 	// ================FOR THE COVERFLOW=================//
 	private void setupCoverFlow(final boolean reflect) {
 		if (reflect) {
@@ -278,6 +371,9 @@ public class ViewActivity extends Activity {
 		setupListeners();
 	}
 
+	/**
+	 * Setup listeners for the reflectingCoverFlow.
+	 */
 	private void setupListeners() {
 		reflectingCoverFlow.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -393,6 +489,9 @@ public class ViewActivity extends Activity {
 		 */
 	}
 
+	/**
+	 *  Listeners .
+	 */
 	private void breakListeners() {
 		reflectingCoverFlow.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -406,7 +505,6 @@ public class ViewActivity extends Activity {
 				prompt_name = image_names[position].split("\\.")[0].toString().toLowerCase();
 				stimuliText.setText(prompt_name);
 				isChange = 1;
-
 			}
 		});
 
@@ -441,6 +539,9 @@ public class ViewActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -448,6 +549,9 @@ public class ViewActivity extends Activity {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -472,8 +576,8 @@ public class ViewActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	// =======================FOR THE STAR==============================//
 
+	/** The golden grid view listener. */
 	OnItemClickListener ggvListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -550,6 +654,7 @@ public class ViewActivity extends Activity {
 		}
 	};
 
+	/** The silver grid view. */
 	OnItemClickListener sgvListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -631,6 +736,7 @@ public class ViewActivity extends Activity {
 		}
 	};
 
+	/** The record button listener. */
 	android.view.View.OnClickListener b_recordListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View arg0) {
@@ -705,6 +811,7 @@ public class ViewActivity extends Activity {
 		}
 	};
 
+	/** The stop button listener. */
 	android.view.View.OnClickListener b_stopListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -775,6 +882,7 @@ public class ViewActivity extends Activity {
 		}
 	};
 
+	/** The play button listener. */
 	android.view.View.OnClickListener b_playListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -817,6 +925,7 @@ public class ViewActivity extends Activity {
 		}
 	};
 
+	/** The recording completion listener. */
 	OnCompletionListener compListener = new OnCompletionListener() {
 		@Override
 		public void onCompletion(MediaPlayer arg0) {
@@ -834,28 +943,50 @@ public class ViewActivity extends Activity {
 		}
 	};
 
+	/**
+	 * The Class StarGVAdapter for golden/silver star grid view.
+	 */
 	static class StarGVAdapter extends BaseAdapter {
+		
+		/** The m context. */
 		private Context mContext;
 
+		/**
+		 * Instantiates a new star gv adapter.
+		 *
+		 * @param context the context
+		 */
 		public StarGVAdapter(Context context) {
 			this.mContext = context;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getCount()
+		 */
 		@Override
 		public int getCount() {
 			return 20;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItem(int)
+		 */
 		@Override
 		public Object getItem(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItemId(int)
+		 */
 		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView star;
@@ -880,6 +1011,9 @@ public class ViewActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Save upload URL for the recording.
+	 */
 	protected void saveUploadUrl() {
 		// TODO Auto-generated method stub
 		Log.i("current_position",current_position+"");
@@ -895,6 +1029,9 @@ public class ViewActivity extends Activity {
 		Log.i("View upload url", saved.getString(filename, ""));
 	}
 
+	/**
+	 * Initialize the animation.
+	 */
 	public void setAnimation() {
 		mAnimation = new AlphaAnimation(1, 0);
 		mAnimation.setDuration(400);
@@ -913,6 +1050,9 @@ public class ViewActivity extends Activity {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -928,10 +1068,16 @@ public class ViewActivity extends Activity {
 	}
 
 
+	/**
+	 * Save start exercise time.
+	 */
 	private void startExerciseTime() {
 		start_time = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(Calendar.getInstance().getTime());
 	}
 
+	/**
+	 * Save end exercise time.
+	 */
 	private void saveExerciseTime() {
 		UsageLog exerciseLog = new UsageLog(app.username+"_"+"exercise.txt");
 		String end_time = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(Calendar.getInstance().getTime());

@@ -25,10 +25,17 @@ import org.json.JSONObject;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Content.
+ */
 public class Content implements Parcelable  {
 		
 	//private static Content instance;
 
+	/**
+	 * Instantiates a new content.
+	 */
 	public Content() {
 
 	}
@@ -44,133 +51,306 @@ public class Content implements Parcelable  {
 //		return instance;
 //	}
 	
-	private String type;	
+	/** The type. */
+private String type;	
+	
+	/**
+	 * Sets the type.
+	 *
+	 * @param type the new type
+	 */
 	public void setType(String type) {
        this.type = type;
     }
 
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
     public String getType() {
        return type;
     }
     
+    /** The filename. */
     private String filename;	
+	
+	/**
+	 * Sets the file name.
+	 *
+	 * @param filename the new file name
+	 */
 	public void setFileName(String filename) {
        this.filename = filename;
     }
 
+    /**
+     * Gets the file name.
+     *
+     * @return the file name
+     */
     public String getFileName() {
        return filename;
     }
     
+    /** The filepath. */
     private String filepath;	
+	
+	/**
+	 * Sets the file path.
+	 *
+	 * @param filepath the new file path
+	 */
 	public void setFilePath(String filepath) {
        this.filepath = filepath;
     }
 
+    /**
+     * Gets the file path.
+     *
+     * @return the file path
+     */
     public String getFilePath() {
        return filepath;
     }
 	
+	/** The filesize. */
 	private int filesize;	
+	
+	/**
+	 * Sets the file size.
+	 *
+	 * @param filesize the new file size
+	 */
 	public void setFileSize(int filesize) {
        this.filesize = filesize;
     }
 
+    /**
+     * Gets the file size.
+     *
+     * @return the file size
+     */
     public int getFileSize() {
        return filesize;
     }
 
+	/** The fileurl. */
 	private String fileurl;	
+	
+	/**
+	 * Sets the file url.
+	 *
+	 * @param fileurl the new file url
+	 */
 	public void setFileUrl(String fileurl) {
        this.fileurl = fileurl;
     }
 
+    /**
+     * Gets the file url.
+     *
+     * @return the file url
+     */
     public String getFileUrl() {
        return fileurl;
     }
     
+    /** The content. */
     private String content;	
+	
+	/**
+	 * Sets the content.
+	 *
+	 * @param content the new content
+	 */
 	public void setContent(String content) {
        this.content = content;
     }
 
+    /**
+     * Gets the content.
+     *
+     * @return the content
+     */
     public String getContent() {
        return content;
     }
     
+    /** The timecreated. */
     private long timecreated;	
+	
+	/**
+	 * Sets the time created.
+	 *
+	 * @param timecreated the new time created
+	 */
 	public void setTimeCreated(long timecreated) {
        this.timecreated = timecreated;
     }
 
+    /**
+     * Gets the time created.
+     *
+     * @return the time created
+     */
     public long getTimeCreated() {
        return timecreated;
     }
     
+    /** The timemodified. */
     private long timemodified;	
+	
+	/**
+	 * Sets the time modified.
+	 *
+	 * @param timemodified the new time modified
+	 */
 	public void setTimeModified(long timemodified) {
        this.timemodified = timemodified;
     }
 
+    /**
+     * Gets the time modified.
+     *
+     * @return the time modified
+     */
     public long getTimeModified() {
        return timemodified;
     }
     
+    /** The sortorder. */
     private int sortorder;	
+	
+	/**
+	 * Sets the sort order.
+	 *
+	 * @param sortorder the new sort order
+	 */
 	public void setSortOrder(int sortorder) {
        this.sortorder = sortorder;
     }
 
+    /**
+     * Gets the sort order.
+     *
+     * @return the sort order
+     */
     public int getSortOrder() {
        return sortorder;
     }
     
+    /** The userid. */
     private int userid;	
+	
+	/**
+	 * Sets the user id.
+	 *
+	 * @param userid the new user id
+	 */
 	public void setUserId(int userid) {
        this.userid = userid;
     }
 
+    /**
+     * Gets the user id.
+     *
+     * @return the user id
+     */
     public int getUserId() {
        return userid;
     }
 	    
+    /** The author. */
     private String author;	
+	
+	/**
+	 * Sets the author.
+	 *
+	 * @param author the new author
+	 */
 	public void setAuthor(String author) {
        this.author = author;
     }
 
+    /**
+     * Gets the author.
+     *
+     * @return the author
+     */
     public String getAuthor() {
        return author;
     }
     
+    /** The license. */
     private String license;	
+	
+	/**
+	 * Sets the license.
+	 *
+	 * @param license the new license
+	 */
 	public void setLicense(String license) {
        this.license = license;
     }
 
+    /**
+     * Gets the license.
+     *
+     * @return the license
+     */
     public String getLicense() {
        return license;
     }
 
+    /** The transition. */
     private String transition;	
+	
+	/**
+	 * Gets the transition.
+	 *
+	 * @return the transition
+	 */
 	public String getTransition() {
 		return transition;
 	}
 
+	/**
+	 * Sets the transition.
+	 *
+	 * @param transition the new transition
+	 */
 	public void setTransition(String transition) {
 		this.transition = transition;
 	}
 
     
+    /** The mode. */
     private String mode;	
+	
+	/**
+	 * Gets the mode.
+	 *
+	 * @return the mode
+	 */
 	public String getMode() {
 		return mode;
 	}
 
+	/**
+	 * Sets the mode.
+	 *
+	 * @param mode the new mode
+	 */
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
     
+    /**
+     * Populate content.
+     *
+     * @param jsonObject the json object
+     */
     public void populateContent(JSONObject jsonObject) {
      
 		if (jsonObject != null) {    			
@@ -221,11 +401,15 @@ public class Content implements Parcelable  {
 
     /* everything below here is for implementing Parcelable */ 
 	 
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#describeContents()
+     */
     // 99.9% of the time you can just ignore this 
     public int describeContents() { 
         return 0; 
     } 
     
+ /** The Constant CREATOR. */
  // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods 
     public static final Parcelable.Creator<Content> CREATOR = new Parcelable.Creator<Content>() { 
         public Content createFromParcel(Parcel in) { 
@@ -237,6 +421,9 @@ public class Content implements Parcelable  {
         } 
     }; 
  
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+     */
     // write your object's data to the passed-in Parcel 
     public void writeToParcel(Parcel dest, int flags) { 
     	dest.writeString(type); 
@@ -255,6 +442,11 @@ public class Content implements Parcelable  {
     	dest.writeString(mode);
     }
     
+    /**
+     * Instantiates a new content.
+     *
+     * @param in the in
+     */
     private Content(Parcel in) { 
         this.type = in.readString(); 
         this.filename = in.readString();

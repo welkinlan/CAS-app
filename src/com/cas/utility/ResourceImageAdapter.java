@@ -1,3 +1,8 @@
+/*
+ *  This class is an adapter that provides images from a fixed set of resource
+ *  ids. Bitmaps and ImageViews are kept as weak references so that they can be
+ *  cleared by garbage collection when not needed.
+ */
 package com.cas.utility;
 
 import java.io.IOException;
@@ -22,6 +27,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.widget.Toast;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class is an adapter that provides images from a fixed set of resource
  * ids. Bitmaps and ImageViews are kept as weak references so that they can be
@@ -48,13 +54,14 @@ public class ResourceImageAdapter extends AbstractCoverFlowImageAdapter {
     /** The bitmap map. */
     private final Map<Integer, WeakReference<Bitmap>> bitmapMap = new HashMap<Integer, WeakReference<Bitmap>>();
 
+    /** The context. */
     private final Context context;
 
     /**
      * Creates the adapter with default set of resource images.
-     * 
-     * @param context
-     *            context
+     *
+     * @param context            context
+     * @param image_resource_list the image_resource_list
      */
     public ResourceImageAdapter(final Context context, String[] image_resource_list) {
         super();
@@ -64,9 +71,8 @@ public class ResourceImageAdapter extends AbstractCoverFlowImageAdapter {
 
     /**
      * Replaces resources with those specified.
-     * 
-     * @param resourceIds
-     *            array of ids of resources.
+     *
+     * @param resourceNames the new resources
      */
     public final synchronized void setResources(String[] resourceNames) {
         IMAGE_NAMES.clear();

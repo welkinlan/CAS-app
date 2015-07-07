@@ -28,9 +28,16 @@ import org.json.JSONObject;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Course.
+ */
 public class Course implements Parcelable {
 	//private static Course instance;
 
+	/**
+	 * Instantiates a new course.
+	 */
 	public Course() {
 
 	}
@@ -46,69 +53,158 @@ public class Course implements Parcelable {
 //		return instance;
 //	}
 	
-	private int id;	
+	/** The id. */
+private int id;	
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(int id) {
        this.id = id;
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
     public int getId() {
        return id;
     }
 
+	/** The shortname. */
 	private String shortname;	
+	
+	/**
+	 * Sets the short name.
+	 *
+	 * @param shortname the new short name
+	 */
 	public void setShortName(String shortname) {
        this.shortname = shortname;
     }
 
+    /**
+     * Gets the short name.
+     *
+     * @return the short name
+     */
     public String getShortName() {
        return shortname;
     }
 	    
+    /** The fullname. */
     private String fullname;	
+	
+	/**
+	 * Sets the fullname.
+	 *
+	 * @param fullname the new fullname
+	 */
 	public void setFullname(String fullname) {
        this.fullname = fullname;
     }
 
+    /**
+     * Gets the fullname.
+     *
+     * @return the fullname
+     */
     public String getFullname() {
        return fullname;
     }
     
+    /** The enrolledusercount. */
     private int enrolledusercount;	
+	
+	/**
+	 * Sets the enrolled user count.
+	 *
+	 * @param enrolledusercount the new enrolled user count
+	 */
 	public void setEnrolledUserCount(int enrolledusercount) {
        this.enrolledusercount = enrolledusercount;
     }
 
+    /**
+     * Gets the enrolled user count.
+     *
+     * @return the enrolled user count
+     */
     public int getEnrolledUserCount() {
        return enrolledusercount;
     }
     
+    /** The idnumber. */
     private String idnumber;	
+	
+	/**
+	 * Sets the id number.
+	 *
+	 * @param idnumber the new id number
+	 */
 	public void setIdNumber(String idnumber) {
        this.idnumber = idnumber;
     }
 
+    /**
+     * Gets the id number.
+     *
+     * @return the id number
+     */
     public String getIdNumber() {
        return idnumber;
     }
     
+    /** The visible. */
     private int visible;	
+	
+	/**
+	 * Sets the visible.
+	 *
+	 * @param visible the new visible
+	 */
 	public void setVisible(int visible) {
        this.visible = visible;
     }
 
+    /**
+     * Gets the visible.
+     *
+     * @return the visible
+     */
     public int getVisible() {
        return visible;
     }
     
+    /** The coursecontents. */
     private ArrayList<CourseContent> coursecontents = new ArrayList<CourseContent>();	
+	
+	/**
+	 * Sets the course content.
+	 *
+	 * @param coursecontents the new course content
+	 */
 	public void setCourseContent(ArrayList<CourseContent> coursecontents) {
        this.coursecontents = coursecontents;
     }
 
+    /**
+     * Gets the course content.
+     *
+     * @return the course content
+     */
     public ArrayList<CourseContent> getCourseContent() {
        return coursecontents;
     }
 
+    /**
+     * Populate course.
+     *
+     * @param jsonObject the json object
+     */
     public void populateCourse(JSONObject jsonObject) {    
     	    	 
     	try {  
@@ -140,11 +236,15 @@ public class Course implements Parcelable {
     
     /* everything below here is for implementing Parcelable */ 
 	 
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#describeContents()
+     */
     // 99.9% of the time you can just ignore this 
     public int describeContents() { 
         return 0; 
     } 
     
+ /** The Constant CREATOR. */
  // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods 
     public static final Parcelable.Creator<Course> CREATOR = new Parcelable.Creator<Course>() { 
         public Course createFromParcel(Parcel in) { 
@@ -156,6 +256,9 @@ public class Course implements Parcelable {
         } 
     }; 
  
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+     */
     // write your object's data to the passed-in Parcel 
     public void writeToParcel(Parcel dest, int flags) { 
     	dest.writeInt(id);
@@ -167,6 +270,11 @@ public class Course implements Parcelable {
     	dest.writeTypedList(coursecontents); 
     }
     
+    /**
+     * Instantiates a new course.
+     *
+     * @param in the in
+     */
     private Course(Parcel in) { 
         this.id = in.readInt();
         this.shortname = in.readString();

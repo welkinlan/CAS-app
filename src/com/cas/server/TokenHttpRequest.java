@@ -30,8 +30,18 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TokenHttpRequest.
+ */
 public class TokenHttpRequest {
 
+	/**
+	 * Do http request.
+	 *
+	 * @param url the url
+	 * @return the string
+	 */
 	/*
 	 * Gets the token based on the username, password and url
 	 * It returns the token 

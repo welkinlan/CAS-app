@@ -27,84 +27,191 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class User.
+ */
 public class User implements Parcelable {
 	
+	/**
+	 * Instantiates a new user.
+	 */
 	public User() {
 
 	}
 
+	/** The username. */
 	private String username;	
+	
+	/**
+	 * Sets the username.
+	 *
+	 * @param username the new username
+	 */
 	public void setUsername(String username) {
        this.username = username;
     }
 
+    /**
+     * Gets the username.
+     *
+     * @return the username
+     */
     public String getUsername() {
        return username;
     }
     
+    /** The password. */
     private String password;	
+	
+	/**
+	 * Sets the password.
+	 *
+	 * @param password the new password
+	 */
 	public void setPassword(String password) {
        this.password = password;
     }
 
+    /**
+     * Gets the password.
+     *
+     * @return the password
+     */
     public String getPassword() {
        return password;
     }
     
+    /** The url. */
     private String url;	
+	
+	/**
+	 * Sets the url.
+	 *
+	 * @param url the new url
+	 */
 	public void setUrl(String url) {
        this.url = url;
     }
 
+    /**
+     * Gets the url.
+     *
+     * @return the url
+     */
     public String getUrl() {
        return url;
     }
     
+    /** The token. */
     private String token;	
+	
+	/**
+	 * Sets the token.
+	 *
+	 * @param token the new token
+	 */
 	public void setToken(String token) {
        this.token = token;
     }
 
+    /**
+     * Gets the token.
+     *
+     * @return the token
+     */
     public String getToken() {
        return token;
     }
     
+    /** The tokencreatedate. */
     private Date tokencreatedate;	
+	
+	/**
+	 * Sets the token create date.
+	 */
 	public void setTokenCreateDate() {
        this.tokencreatedate = new Date(); 
     }
 
+    /**
+     * Gets the token create date.
+     *
+     * @return the token create date
+     */
     public Date getTokenCreateDate() {
        return tokencreatedate;
     }
     
+    /** The selectedcourseid. */
     private int selectedcourseid = 99999;	
-   	public void setSelectedCourseId(int selectedcourseid) {
+   	
+	   /**
+	    * Sets the selected course id.
+	    *
+	    * @param selectedcourseid the new selected course id
+	    */
+	   public void setSelectedCourseId(int selectedcourseid) {
    	  this.selectedcourseid = selectedcourseid;
    	}
 
-   	public int getSelectedCourseId() {
+   	/**
+	    * Gets the selected course id.
+	    *
+	    * @return the selected course id
+	    */
+	   public int getSelectedCourseId() {
       return selectedcourseid;
    	}
     
+    /** The siteinfo. */
     private SiteInfo siteinfo;	
+    
+    /**
+     * Sets the site info.
+     *
+     * @param siteinfo the new site info
+     */
     public void setSiteInfo(SiteInfo siteinfo) {
 	   this.siteinfo = siteinfo; 
 	}
     
+    /**
+     * Gets the site info.
+     *
+     * @return the site info
+     */
     public SiteInfo getSiteInfo() {
        return siteinfo;
     }
     
+    /** The courses. */
     private ArrayList<Course> courses = new ArrayList<Course>();	
+    
+    /**
+     * Sets the courses.
+     *
+     * @param courses the new courses
+     */
     public void setCourses(ArrayList<Course> courses) {
         this.courses = courses; 
      }
     
+    /**
+     * Gets the courses.
+     *
+     * @return the courses
+     */
     public ArrayList<Course> getCourses() {
        return courses;
     }
     
+    /**
+     * Gets the course.
+     *
+     * @param id the id
+     * @return the course
+     */
     public Course getCourse(int id) {
     	for (Course course : courses) { 
 		  if (course.getId() == id) { 
@@ -116,11 +223,15 @@ public class User implements Parcelable {
     
     /* everything below here is for implementing Parcelable */ 
 	 
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#describeContents()
+     */
     // 99.9% of the time you can just ignore this 
     public int describeContents() { 
         return 0; 
     } 
     
+ /** The Constant CREATOR. */
  // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() { 
         public User createFromParcel(Parcel in) { 
@@ -132,6 +243,9 @@ public class User implements Parcelable {
         } 
     }; 
  
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+     */
     // write your object's data to the passed-in Parcel 
     public void writeToParcel(Parcel dest, int flags) { 
     	dest.writeString(username); 
@@ -144,6 +258,11 @@ public class User implements Parcelable {
     	dest.writeTypedList(courses); 
     }
     
+    /**
+     * Instantiates a new user.
+     *
+     * @param in the in
+     */
     private User(Parcel in) { 
         this.username = in.readString(); 
         this.password = in.readString();

@@ -1,3 +1,7 @@
+/*
+ * This class is another version of game activity with animations
+ * Deprecated for now
+ */
 package com.cas.activity;
 
 import java.io.IOException;
@@ -52,80 +56,188 @@ import com.cas.utility.StringHelper;
 import com.cas.utility.TurnAnimation;
 import com.example.cas.R;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameActivityWithAnimation.
+ */
 public class GameActivityWithAnimation extends Activity {
 
+	/** The test. */
 	int test = 10;
 	
+	/** The Constant NUM. */
 	private static final int NUM = 5;
+	
+	/** The app. */
 	Globals app;
+	
+	/** The user. */
 	User user;
+	
+	/** The course. */
 	Course course;
+	
+	/** The module. */
 	Module module;
+	
+	/** The actual_images. */
 	ArrayList<Content> actual_images = new ArrayList<Content>(NUM);
+	
+	/** The random_images. */
 	ArrayList<Content> random_images;
+	
+	/** The image_names. */
 	private static String[] image_names = new String[NUM];
+	
+	/** The sh. */
 	StringHelper sh = new StringHelper();
+	
+	/** The prompt_name. */
 	String prompt_name="";
+	
+	/** The pending_pos. */
 	int pending_pos=-1;
+	
+	/** The current_position. */
 	int current_position = 0;
 
+	/** The gv. */
 	private GridView gv;
+	
+	/** The tabby tv. */
 	private TextView tabbyTV;
+	
+	/** The tabby image. */
 	private ImageView tabbyImage;
+	
+	/** The silver gv. */
 	private static GridView goldGV, silverGV;
+	
+	/** The silver adapter. */
 	private StarGVAdapter goldAdapter, silverAdapter;
 
+	/** The card1. */
 	// ===============Variables for game==================//
 	private CardItem card1;
+	
+	/** The card2. */
 	private CardItem card2;
 	// private CardItem card_temp;
+	/** The completed ids. */
 	// private static int numCards = 10;
 	private ArrayList<Integer> completedIds = new ArrayList<Integer>();
+	
+	/** The attempts. */
 	private int attempts = -1;
+	
+	/** The count. */
 	private int count = -1;
+	
+	/** The golden_star_num. */
 	private int golden_star_num = 0;
+	
+	/** The silver_star_num. */
 	private int silver_star_num = 0;
+	
+	/** The golden star. */
 	private static Integer goldenStar = R.drawable.golden_star;
+	
+	/** The silver star. */
 	private static Integer silverStar = R.drawable.silver_star;
+	
+	/** The default star. */
 	private static Integer defaultStar = R.drawable.default_star;
+	
+	/** The next silver star. */
 	private static Integer nextSilverStar = R.drawable.next_silver_star;
+	
+	/** The next golden star. */
 	private static Integer nextGoldenStar = R.drawable.next_golden_star;
+	
+	/** The is golden given. */
 	private boolean isSilverGiven = false, isGoldenGiven = false;
+	
+	/** The spent time. */
 	private Long spentTime = null;
+	
+	/** The reward_names. */
 	private static String[] reward_names = { "Awesome!", "Excellent!", "Good!",
 			"Great work!", "Nice job!", "Super!" };
+	
+	/** The encourage_names. */
 	private static String[] encourage_names = { "So close!", "Try again :)", "Oooops!"};
+	
+	/** The reward_file_names. */
 	private static String[] reward_file_names = { "Awesome", "Excellent", "Good",
 		"greatwork", "nicejob", "Super" };
 	
 	
+	/** The lock. */
 	private static Object lock = new Object();
+	
+	/** The bg image. */
 	private Integer bgImage = R.drawable.question;
 
+	/** The alpha animation. */
 	// ===============Variables for animation===================//
 	private Animation alphaAnimation;
+	
+	/** The scale animation. */
 	private Animation scaleAnimation;
+	
+	/** The set. */
 	private AnimationSet set;
+	
+	/** The current view. */
 	private View currentView;
 
+	/** The b_play. */
 	// ===============Variables for audio recording===================//
 	private Button b_record, b_stop, b_play;
+	
+	/** The record en. */
 	private Integer recordEn = R.drawable.recordv;
+	
+	/** The record un. */
 	private Integer recordUn = R.drawable.recordh;
+	
+	/** The stop en. */
 	private Integer stopEn = R.drawable.stopv;
+	
+	/** The stop un. */
 	private Integer stopUn = R.drawable.stoph;
+	
+	/** The play en. */
 	private Integer playEn = R.drawable.playv;
+	
+	/** The play un. */
 	private Integer playUn = R.drawable.playh;
+	
+	/** The play end. */
 	private final int FREE = 0, READY_FOR_RECORD = 1, RECORDING = 2,
 			RECORD_END = 3, PLAYING = 4, PLAY_END = 5;
+	
+	/** The state. */
 	private int state = FREE;
+	
+	/** The filename. */
 	private String filename;
 
+	/** The recorder. */
 	private AudioRecorder recorder;
+	
+	/** The media player. */
 	private MediaPlayer mediaPlayer;
+	
+	/** The prompt player. */
 	private MediaPlayer promptPlayer;
+	
+	/** The tabby rotation. */
 	private TurnAnimation tabbyRotation;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -147,6 +259,9 @@ public class GameActivityWithAnimation extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -154,6 +269,9 @@ public class GameActivityWithAnimation extends Activity {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -164,6 +282,9 @@ public class GameActivityWithAnimation extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * Sets the view.
+	 */
 	private void setView() {
 		// TODO Auto-generated method stub
 		goldGV = (GridView) findViewById(R.id.goldGV);
@@ -206,6 +327,9 @@ public class GameActivityWithAnimation extends Activity {
 		setAgreeAnimation();
 	}
 
+	/**
+	 * Load cards.
+	 */
 	private void loadCards() {
 		// TODO Auto-generated method stub
 		card1 = null;
@@ -276,6 +400,12 @@ public class GameActivityWithAnimation extends Activity {
 	// ===========================FOR THE
 	// GAME=================================//
 
+	/**
+	 * Turn.
+	 *
+	 * @param id the id
+	 * @param view the view
+	 */
 	private void turn(int id, View view) {
 
 		if (card1 == null) {
@@ -304,6 +434,9 @@ public class GameActivityWithAnimation extends Activity {
 		isSilverGiven = false;
 	}
 
+	/**
+	 * Check cards.
+	 */
 	public void checkCards() {
 		// Log.i("card1", "" + cards_uid[card1.id]);
 		// Log.i("card2", "" + cards_uid[card2.id]);
@@ -392,6 +525,9 @@ public class GameActivityWithAnimation extends Activity {
 	}
 
 	// ===========================FOR THE
+	/**
+	 * Sets the agree animation.
+	 */
 	// ANIMATION=================================//
 	@SuppressLint("NewApi")
 	public void setAgreeAnimation() {
@@ -420,6 +556,13 @@ public class GameActivityWithAnimation extends Activity {
 
 	}
 
+	/**
+	 * Apply turn rotation.
+	 *
+	 * @param position the position
+	 * @param start the start
+	 * @param end the end
+	 */
 	// For the turn image animation
 	private void applyTurnRotation(int position, float start, float end) {
 		final float centerX = currentView.getWidth() / 2.0f;
@@ -442,19 +585,35 @@ public class GameActivityWithAnimation extends Activity {
 	 * container is rotated 90 degrees and thus invisible.
 	 */
 	private final class DisplayNextView implements Animation.AnimationListener {
+		
+		/** The m position. */
 		private final int mPosition;
 
+		/**
+		 * Instantiates a new display next view.
+		 *
+		 * @param position the position
+		 */
 		private DisplayNextView(int position) {
 			mPosition = position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.view.animation.Animation.AnimationListener#onAnimationStart(android.view.animation.Animation)
+		 */
 		public void onAnimationStart(Animation animation) {
 		}
 
+		/* (non-Javadoc)
+		 * @see android.view.animation.Animation.AnimationListener#onAnimationEnd(android.view.animation.Animation)
+		 */
 		public void onAnimationEnd(Animation animation) {
 			currentView.post(new SwapViews(mPosition));
 		}
 
+		/* (non-Javadoc)
+		 * @see android.view.animation.Animation.AnimationListener#onAnimationRepeat(android.view.animation.Animation)
+		 */
 		public void onAnimationRepeat(Animation animation) {
 		}
 	}
@@ -465,12 +624,22 @@ public class GameActivityWithAnimation extends Activity {
 	 */
 	@SuppressLint("DefaultLocale")
 	private final class SwapViews implements Runnable {
+		
+		/** The m position. */
 		private final int mPosition;
 
+		/**
+		 * Instantiates a new swap views.
+		 *
+		 * @param position the position
+		 */
 		public SwapViews(int position) {
 			mPosition = position;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@SuppressLint("DefaultLocale")
 		public void run() {
 			ImageView image = (ImageView) currentView.findViewById(R.id.icon);
@@ -511,29 +680,51 @@ public class GameActivityWithAnimation extends Activity {
 	}
 
 	// *=======================FOR THE IMAGE
+	/**
+	 * The Class ImageAdapter.
+	 */
 	// ADAPTER==============================*//
 	static class ImageAdapter extends BaseAdapter {
+		
+		/** The m context. */
 		private Context mContext;
 
+		/**
+		 * Instantiates a new image adapter.
+		 *
+		 * @param context the context
+		 */
 		public ImageAdapter(Context context) {
 			this.mContext = context;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getCount()
+		 */
 		@Override
 		public int getCount() {
 			return image_names.length;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItem(int)
+		 */
 		@Override
 		public Object getItem(int position) {
 			return image_names[position];
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItemId(int)
+		 */
 		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
@@ -544,28 +735,50 @@ public class GameActivityWithAnimation extends Activity {
 		}
 	}
 
+	/**
+	 * The Class StarGVAdapter.
+	 */
 	static class StarGVAdapter extends BaseAdapter {
+		
+		/** The m context. */
 		private Context mContext;
 
+		/**
+		 * Instantiates a new star gv adapter.
+		 *
+		 * @param context the context
+		 */
 		public StarGVAdapter(Context context) {
 			this.mContext = context;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getCount()
+		 */
 		@Override
 		public int getCount() {
 			return 20;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItem(int)
+		 */
 		@Override
 		public Object getItem(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItemId(int)
+		 */
 		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView star;
@@ -590,6 +803,7 @@ public class GameActivityWithAnimation extends Activity {
 		}
 	}
 
+	/** The grid listener. */
 	// =======================EVENT LISTENERS======================//
 	OnItemClickListener gridListener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -623,6 +837,7 @@ public class GameActivityWithAnimation extends Activity {
 		}
 	};
 
+	/** The ggv listener. */
 	OnItemClickListener ggvListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -661,6 +876,7 @@ public class GameActivityWithAnimation extends Activity {
 		}
 	};
 
+	/** The sgv listener. */
 	OnItemClickListener sgvListener = new OnItemClickListener() {
 
 		@Override
@@ -700,6 +916,7 @@ public class GameActivityWithAnimation extends Activity {
 		}
 	};
 
+	/** The b_record listener. */
 	android.view.View.OnClickListener b_recordListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View arg0) {
@@ -732,6 +949,7 @@ public class GameActivityWithAnimation extends Activity {
 		}
 	};
 
+	/** The b_stop listener. */
 	android.view.View.OnClickListener b_stopListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View arg0) {
@@ -782,6 +1000,7 @@ public class GameActivityWithAnimation extends Activity {
 		}
 	};
 
+	/** The b_play listener. */
 	android.view.View.OnClickListener b_playListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -821,6 +1040,7 @@ public class GameActivityWithAnimation extends Activity {
 		}
 	};
 
+	/** The comp listener. */
 	OnCompletionListener compListener = new OnCompletionListener() {
 		@Override
 		public void onCompletion(MediaPlayer arg0) {
@@ -836,6 +1056,9 @@ public class GameActivityWithAnimation extends Activity {
 
 	};
 	
+	/**
+	 * Save upload url.
+	 */
 	protected void saveUploadUrl() {
 		// TODO Auto-generated method stub
 		Log.i("current_position",current_position+"");
@@ -850,6 +1073,11 @@ public class GameActivityWithAnimation extends Activity {
 		Log.i("Game upload url", saved.getString(filename, ""));
 	}
 
+	/**
+	 * Play prompt.
+	 *
+	 * @param position the position
+	 */
 	protected void playPrompt(int position) {
 		// TODO Auto-generated method stub
 		String name = image_names[position].split("\\.")[0].toString();

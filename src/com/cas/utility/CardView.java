@@ -1,3 +1,6 @@
+/*
+ * The utility class for creating an image view with reflection.
+ */
 package com.cas.utility;
 
 import android.graphics.Bitmap;
@@ -12,13 +15,17 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.Drawable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CardView.
+ */
 public class CardView {
 
  /**
-  * 添加倒影，原理，先翻转图片，由上到下放大透明度
-  * 
-  * @param originalImage
-  * @return
+  * Add reflectionsby flipping the image and change the alpha from bottom-up
+  *
+  * @param originalImage the original image
+  * @return the bitmap
   */
  public static Bitmap createReflectedImage(Bitmap originalImage) {
   // The gap we want between the reflection and the original image
@@ -67,7 +74,12 @@ public class CardView {
   return bitmapWithReflection;
  }
  
- //drawable 类型转化为bitmap
+ /**
+  * Drawable to bitmap.
+  *
+  * @param drawable the drawable
+  * @return the bitmap
+  */
  public static Bitmap drawableToBitmap(Drawable drawable) {
 
   Bitmap bitmap = Bitmap

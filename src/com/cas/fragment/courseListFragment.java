@@ -1,3 +1,6 @@
+/*
+ * The fragment class for courseListActivity
+ */
 package com.cas.fragment;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import com.cas.model.User;
 import com.cas.utility.Globals;
 import com.example.cas.R;
 
+// TODO: Auto-generated Javadoc
 /**
  * A list fragment representing a list of courses. This fragment also supports
  * tablet devices by allowing list items to be given an 'activated' state upon
@@ -55,8 +59,11 @@ public class courseListFragment extends ListFragment {
 	 * selections.
 	 */
 	public interface Callbacks {
+		
 		/**
 		 * Callback for when an item has been selected.
+		 *
+		 * @param id the id
 		 */
 		public void onItemSelected(String id);
 	}
@@ -71,7 +78,10 @@ public class courseListFragment extends ListFragment {
 		}
 	};
 	
+	/** The user. */
 	private static User user;
+	
+	/** The courses. */
 	private static ArrayList<Course> courses;
 
 	/**
@@ -81,6 +91,9 @@ public class courseListFragment extends ListFragment {
 	public courseListFragment() {
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,6 +104,9 @@ public class courseListFragment extends ListFragment {
 		setListAdapter(new CourseListAdapter(getActivity(), courses));
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.ListFragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -104,6 +120,9 @@ public class courseListFragment extends ListFragment {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onAttach(android.app.Activity)
+	 */
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -117,6 +136,9 @@ public class courseListFragment extends ListFragment {
 		mCallbacks = (Callbacks) activity;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onDetach()
+	 */
 	@Override
 	public void onDetach() {
 		super.onDetach();
@@ -125,6 +147,9 @@ public class courseListFragment extends ListFragment {
 		mCallbacks = sDummyCallbacks;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.ListFragment#onListItemClick(android.widget.ListView, android.view.View, int, long)
+	 */
 	@Override
 	public void onListItemClick(ListView listView, View view, int position,
 			long id) {
@@ -135,6 +160,9 @@ public class courseListFragment extends ListFragment {
 		mCallbacks.onItemSelected(position+"");
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onSaveInstanceState(android.os.Bundle)
+	 */
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -147,6 +175,8 @@ public class courseListFragment extends ListFragment {
 	/**
 	 * Turns on activate-on-click mode. When this mode is on, list items will be
 	 * given the 'activated' state when touched.
+	 *
+	 * @param activateOnItemClick the new activate on item click
 	 */
 	public void setActivateOnItemClick(boolean activateOnItemClick) {
 		// When setting CHOICE_MODE_SINGLE, ListView will automatically
@@ -156,6 +186,11 @@ public class courseListFragment extends ListFragment {
 						: ListView.CHOICE_MODE_NONE);
 	}
 
+	/**
+	 * Sets the activated position.
+	 *
+	 * @param position the new activated position
+	 */
 	private void setActivatedPosition(int position) {
 		if (position == ListView.INVALID_POSITION) {
 			getListView().setItemChecked(mActivatedPosition, false);
@@ -165,33 +200,63 @@ public class courseListFragment extends ListFragment {
 		mActivatedPosition = position;
 	}
 	
+	/**
+	 * The Class CourseListAdapter for custom view of the course.
+	 */
 	class CourseListAdapter extends BaseAdapter {
+		
+		/** The context. */
 		private Context context;
+		
+		/** The inflater. */
 		private LayoutInflater inflater;
+		
+		/** The courses. */
 		private List<Course> courses;
 		
+		/**
+		 * Instantiates a new course list adapter.
+		 *
+		 * @param activity the activity
+		 * @param courses the courses
+		 */
 		public CourseListAdapter(Activity activity, List<Course> courses) {
 			this.context = activity;
 			this.courses = courses;
 			inflater = LayoutInflater.from(context);
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getCount()
+		 */
 		public int getCount() {
 			return courses.size();
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.BaseAdapter#getItemViewType(int)
+		 */
 		public int getItemViewType(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItem(int)
+		 */
 		public Object getItem(int arg0) {
 			return courses.get(arg0);
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItemId(int)
+		 */
 		public long getItemId(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+		 */
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			View view;
 			if (convertView == null) {

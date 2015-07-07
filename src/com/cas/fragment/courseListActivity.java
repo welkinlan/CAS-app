@@ -1,3 +1,6 @@
+/*
+ *  This activity shows the left panel (courses).
+ */
 package com.cas.fragment;
 
 import java.text.SimpleDateFormat;
@@ -43,6 +46,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+// TODO: Auto-generated Javadoc
 /**
  * An activity representing a list of courses. This activity has different
  * presentations for handset and tablet-size devices. On handsets, the activity
@@ -66,11 +70,22 @@ public class courseListActivity extends FragmentActivity implements
 	 * device.
 	 */
 	boolean mTwoPane;
+	
+	/** The m handler. */
 	Handler mHandler;
+	
+	/** The user. */
 	static User user;
+	
+	/** The courses. */
 	static ArrayList<Course> courses;
+	
+	/** The app. */
 	Globals app;
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -102,41 +117,9 @@ public class courseListActivity extends FragmentActivity implements
 		// TODO: If exposing deep links into your app, handle intents here.
 	}
 	
-	/*
-	@SuppressLint("HandlerLeak")
-	private void loadData() {
-		// TODO Auto-generated method stub
-		mHandler = new Handler() {
-        	public void handleMessage(Message msg) {
-        		switch(msg.what) {
-	        		case 0:
-	        			break;
-        		}
-        	}
-        };
-        new Thread() {
-        	public void run() {
-        		getDataFromServer();
-        	}
-
-			private void getDataFromServer() {
-				// TODO Auto-generated method stub
-				TimerTask t_task = new TimerTask() {
-					@Override
-					public void run() {
-						mHandler.sendEmptyMessage(0);
-					}
-				};
-				
-				Timer t = new Timer(false);
-			    t.schedule(t_task, 1000);
-			}
-        }.start();
-	}
-	*/
-
-
-	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -164,6 +147,8 @@ public class courseListActivity extends FragmentActivity implements
 	/**
 	 * Callback method from {@link courseListFragment.Callbacks} indicating that
 	 * the item with the given ID was selected.
+	 *
+	 * @param id the id
 	 */
 	@Override
 	public void onItemSelected(String id) {
@@ -191,6 +176,9 @@ public class courseListActivity extends FragmentActivity implements
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {

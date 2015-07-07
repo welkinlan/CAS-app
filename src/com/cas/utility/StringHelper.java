@@ -1,3 +1,6 @@
+/*
+ * The helper class for string format
+ */
 package com.cas.utility;
 
 
@@ -7,12 +10,28 @@ import java.util.Calendar;
 
 import android.text.format.Time;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StringHelper.
+ */
 public class StringHelper{
 	
+	/**
+	 * To lower case.
+	 *
+	 * @param s the s
+	 */
 	public void toLowerCase(String s){
 		
 	}
 	
+	/**
+	 * File name helper.
+	 *
+	 * @param username the username
+	 * @param prompt the prompt
+	 * @return the string representing the recording file name
+	 */
 	public String fileNameHelper(String username, String prompt){
 		/*
 		Time t = new Time();
@@ -30,6 +49,12 @@ public class StringHelper{
 		return username+"_"+prompt+"_"+date+".3gp";
 	}
 	
+	/**
+	 * Upload url helper.
+	 *
+	 * @param file_url the URL on the server to be uploaded
+	 * @return the string[] contents
+	 */
 	public String[] uploadUrlHelper(String file_url){
 		String[] result = file_url.split("/");
 		String[] contents = new String[4];

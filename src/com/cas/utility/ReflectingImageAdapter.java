@@ -1,3 +1,6 @@
+/*
+ *  This adapter provides reflected images from linked adapter.
+ */
 package com.cas.utility;
 
 import android.R.color;
@@ -11,6 +14,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader.TileMode;
 
+// TODO: Auto-generated Javadoc
 /**
  * This adapter provides reflected images from linked adapter.
  * 

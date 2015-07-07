@@ -1,3 +1,6 @@
+/*
+ * The utility class to get file names by extension
+ */
 package com.cas.utility;
 
 import java.io.IOException;
@@ -7,8 +10,20 @@ import java.util.List;
 import junit.framework.Assert;
 import android.content.Context;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AssetsHelper.
+ */
 public class AssetsHelper {
 	
+	/**
+	 * Gets all files in asset by extension.
+	 *
+	 * @param context the context
+	 * @param path the path
+	 * @param extension the extension
+	 * @return all files in asset by extension
+	 */
 	public static String[] getAllFilesInAssetByExtension(Context context, String path, String extension){
         Assert.assertNotNull(context);
 

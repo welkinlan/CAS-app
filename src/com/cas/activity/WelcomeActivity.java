@@ -1,3 +1,6 @@
+/*
+ * The welcome activity
+ */
 package com.cas.activity;
 
 import java.text.DateFormat;
@@ -46,26 +49,63 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WelcomeActivity.
+ */
 public class WelcomeActivity extends Activity {
 
+	/** The shared preferences saved on the device. */
 	static SharedPreferences saved;
+	
+	/** The saved username/password. */
 	SharedPreferences saved_ui;
-	SyncHelper synHelper;
+	
+	/** The sync helper. */
+	SyncHelper syncHelper;
+	
+	/** The global application variable. */
 	Globals app;
+	
+	/** The User info. */
 	static String UserInfo;
+	
+	/** The Mode. */
 	static String Mode;
+	
+	/** The progress dialog. */
 	ProgressDialog progressDialog;
+	
+	/** The login button. */
 	Button loginButton;
+	
+	/** The user name editor. */
 	EditText nameEdit;
+	
+	/** The password editor. */
 	EditText pwEdit;
+	
+	/** The radio buttons. */
 	RadioButton homeR, cliR, aloneR;
 	
+	/** The user. */
 	User user;
-	String username, password, usrUri, pwdUri;
-	private ServiceConnection sc;
-	private final static String TAG = "SERVICE_TEST";
-	boolean isBound=false;
 	
+	/** The string variables. */
+	String username, password, usrUri, pwdUri;
+	
+	/** The service connection. */
+	private ServiceConnection sc;
+	
+	/** The TAG for debugging. */
+	private final static String TAG = "SERVICE_TEST";
+	
+	/** Whether the sync service has been started. */
+	boolean isBound = false;
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,6 +114,9 @@ public class WelcomeActivity extends Activity {
 		setupLoginView();
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onRestart()
+	 */
 	@Override  
 	protected void onRestart() {  
         super.onRestart(); 
@@ -83,6 +126,9 @@ public class WelcomeActivity extends Activity {
     }  
     
 
+	/**
+	 * Setup login views.
+	 */
 	private void setupLoginView()
 	{
 		setContentView(R.layout.activity_welcome);	
@@ -111,6 +157,9 @@ public class WelcomeActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * Gets the saved information from the device.
+	 */
 	protected void getFromLocal() {
 		// TODO Auto-generated method stub
 		username = nameEdit.getText().toString().trim();
@@ -136,7 +185,7 @@ public class WelcomeActivity extends Activity {
         app.user_id = user_id;
         user.setToken(token);
         user.setTokenCreateDate();
-        synHelper = new SyncHelper();
+        syncHelper = new SyncHelper();
         
         try {
 	        ArrayList<Course> courses = new ArrayList<Course>();
@@ -144,7 +193,7 @@ public class WelcomeActivity extends Activity {
 	        if(s_courses != null){
 	        	JSONObject jo_courses = new JSONObject(s_courses);
 	        	//Log.i("jo_courses", jo_courses.toString());
-		        synHelper.getUserCourses(jo_courses, courses);
+		        syncHelper.getUserCourses(jo_courses, courses);
 		       		        	
 		        if (courses.size() > 0) {		        	
 		        	for(int i = 0; i < courses.size(); i++) { 
@@ -153,7 +202,7 @@ public class WelcomeActivity extends Activity {
 		    	        ArrayList<CourseContent> coursecontents = new ArrayList<CourseContent>();
 		    	        String s_cc = saved.getString("course_contents"+c.getId(), "null");
 		    	        JSONObject jo_cc = new JSONObject(s_cc);
-		    	        synHelper.getCourseContents(jo_cc, coursecontents);
+		    	        syncHelper.getCourseContents(jo_cc, coursecontents);
 		    	        
 		    	        if (coursecontents.size() > 0) {
 		    	        	c.setCourseContent(coursecontents);
@@ -191,6 +240,7 @@ public class WelcomeActivity extends Activity {
 	}
 
 
+	/** The handler for handling login progress. */
 	@SuppressLint("HandlerLeak")
 	private final Handler progressHandler = new Handler() {
 		@Override
@@ -214,6 +264,9 @@ public class WelcomeActivity extends Activity {
 		}
 	};
 
+	/**
+	 * First time download information from the server.
+	 */
 	protected void firstDownload() {
 		// TODO Auto-generated method stub
 		progressDialog = ProgressDialog.show(this, "", "First time fetching information...", true);			
@@ -288,6 +341,9 @@ public class WelcomeActivity extends Activity {
 	}
 
 	
+	/**
+	 * Setup background download/upload service.
+	 */
 	private void setupService() {
 		// TODO Auto-generated method stub
 		
@@ -313,6 +369,9 @@ public class WelcomeActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Go to the course selection screen.
+	 */
 	private void nextPage() {
 		// TODO Auto-generated method stub
 		if(homeR.isChecked()){
@@ -332,6 +391,9 @@ public class WelcomeActivity extends Activity {
 		startActivity(nextPage);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -339,6 +401,9 @@ public class WelcomeActivity extends Activity {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -376,6 +441,9 @@ public class WelcomeActivity extends Activity {
 		return false;
 	}
 	
+	/**
+	 * Save session start time.
+	 */
 	private void saveSessionStartTime() {
 		// TODO Auto-generated method stub
 		app.sessionStartTime = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(Calendar.getInstance().getTime());

@@ -1,3 +1,6 @@
+/*
+ * The moodle web service
+ */
 package com.cas.server;
 
 import java.io.DataOutputStream;
@@ -37,19 +40,44 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MoodleWebService.
+ */
 public class MoodleWebService {
 	
+	/** The context. */
 	private Context context;
+	
+	/** The User info. */
 	String UserInfo;
+	
+	/** The saved. */
 	SharedPreferences saved;
+	
+	/** The mode private. */
 	static int MODE_PRIVATE = 0;
 	
+	/**
+	 * Instantiates a new moodle web service.
+	 *
+	 * @param context the context
+	 */
 	public MoodleWebService (Context context) {
 		this.context = context;
 		Globals app = ((Globals)context.getApplicationContext());
 		UserInfo = app.username;
 	}
 	
+	/**
+	 * Gets the web service response.
+	 *
+	 * @param serverurl the serverurl
+	 * @param functionName the function name
+	 * @param urlParameters the url parameters
+	 * @param xslRawId the xsl raw id
+	 * @return the web service response
+	 */
 	private JSONObject getWebServiceResponse(String serverurl, String functionName, String urlParameters, int xslRawId) {
 		JSONObject jsonobj = null;
 		
@@ -118,6 +146,13 @@ public class MoodleWebService {
 		return jsonobj;
 	}
 
+	/**
+	 * Gets the siteinfo.
+	 *
+	 * @param serverurl the serverurl
+	 * @param siteInfo the site info
+	 * @return the siteinfo
+	 */
 	public void getSiteinfo(String serverurl, SiteInfo siteInfo) {
 		String urlParameters = ""; // moodle_webservice_get_siteinfo parameters	//core_webservice_get_site_info		
 		JSONObject jsonobj = getWebServiceResponse(serverurl, "moodle_webservice_get_siteinfo", urlParameters, R.raw.siteinfoxsl);
@@ -125,6 +160,14 @@ public class MoodleWebService {
 	}
 	
 	
+	/**
+	 * Gets the user courses.
+	 *
+	 * @param serverurl the serverurl
+	 * @param userId the user id
+	 * @param coursesArray the courses array
+	 * @return the user courses
+	 */
 	public void getUserCourses(String serverurl, int userId, ArrayList<Course> coursesArray) {
 		
 		String user = String.valueOf(userId);
@@ -164,6 +207,14 @@ public class MoodleWebService {
 		} 
 	}
 	
+	/**
+	 * Gets the course contents.
+	 *
+	 * @param serverurl the serverurl
+	 * @param courseid the courseid
+	 * @param courseContentsArray the course contents array
+	 * @return the course contents
+	 */
 	public void getCourseContents(String serverurl, int courseid, ArrayList<CourseContent> courseContentsArray) {
 		
 		String course = String.valueOf(courseid);

@@ -1,3 +1,6 @@
+/*
+ * The helper for parsing JSON object into an arraylist
+ */
 package com.cas.utility;
 import java.util.ArrayList;
 
@@ -7,7 +10,19 @@ import org.json.JSONObject;
 import com.cas.model.Course;
 import com.cas.model.CourseContent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SyncHelper.
+ */
 public class SyncHelper {
+	
+	/**
+	 * Gets the user courses, parse JSON to array.
+	 *
+	 * @param jsonobj the json string
+	 * @param coursesArray the courses array
+	 * @return 
+	 */
 	public void getUserCourses(JSONObject jsonobj,
 			ArrayList<Course> coursesArray) {
 		try {
@@ -29,6 +44,13 @@ public class SyncHelper {
 		}
 	}
 
+	/**
+	 * Gets the course contents, parse JSON to array..
+	 *
+	 * @param jsonobj the jsonobj
+	 * @param courseContentsArray the course contents array
+	 * @return the course contents
+	 */
 	public void getCourseContents(JSONObject jsonobj,
 			ArrayList<CourseContent> courseContentsArray) {
 

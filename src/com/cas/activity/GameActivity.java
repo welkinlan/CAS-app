@@ -1,3 +1,6 @@
+/*
+ * The activity for the memory game
+ */
 package com.cas.activity;
 
 import java.io.IOException;
@@ -65,89 +68,163 @@ import com.cas.utility.TurnAnimation;
 import com.cas.utility.UsageLog;
 import com.example.cas.R;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameActivity.
+ */
 public class GameActivity extends Activity {
-
+	
+	/** The Constant NUM. */
 	private static final int NUM = 5;
+	
+	/** The global application variable. */
 	Globals app;
+	
+	/** The user. */
 	User user;
+	
+	/** The course. */
 	Course course;
+	
+	/** The current module. */
 	Module module;
+	
+	/** The actual_images. */
 	ArrayList<Content> actual_images = new ArrayList<Content>(NUM);
+	
+	/** The images in random order. */
 	ArrayList<Content> random_images;
+	
+	/** The image names. */
 	private static String[] image_names = new String[NUM];
+	
+	/** The string format helper. */
 	StringHelper sh = new StringHelper();
-	String prompt_name="";
-	int pending_pos=-1;
+	
+	/** The current prompt name. */
+	String prompt_name= "";
+	
+	/** The pending_pos. */
+	int pending_pos = -1;
+	
+	/** The current_position. */
 	int current_position = 0;
 	
-	//save exercise time
+	/** The start time of the current exercise. */
 	String start_time;
+	
+	/** The end time of the current exercise. */
 	String end_time;
 
+	/** The grid view for the game panel. */
 	private GridView gv;
+	
+	/** The tabby textview. */
 	private TextView tabbyTV;
+	
+	/** The silver medal view2. */
 	private ImageView tabbyImage, goldMedalView1, goldMedalView2, silverMedalView1, silverMedalView2;
+	
+	/** The silver gv. */
 	private static GridView goldGV, silverGV;
+	
+	/** The silver medal gv. */
 	private StarGVAdapter goldAdapter, silverAdapter, goldMedalGV, silverMedalGV;
 
-	// ===============Variables for game==================//
-	private CardItem card1;
-	private CardItem card2;
-	// private CardItem card_temp;
-	// private static int numCards = 10;
+	/** The card items. */
+	private CardItem card1, card2;
+	
+	/** The completed images. */
 	private ArrayList<Integer> completedIds = new ArrayList<Integer>();
+	
+	/** The number of attempts. */
 	private int attempts = -1;
+	
+	/**  The count of correct matches. */
 	private int count = -1;
+	
+	/** The golden star number. */
 	private int golden_star_num = 0;
+	
+	/** The silver star number. */
 	private int silver_star_num = 0;
-	private static Integer goldenStar = R.drawable.golden_star;
-	private static Integer silverStar = R.drawable.silver_star;
-	private static Integer defaultStar = R.drawable.default_star;
-	private static Integer nextSilverStar = R.drawable.next_silver_star;
-	private static Integer nextGoldenStar = R.drawable.next_golden_star;
-	private static Integer goldMedal = R.drawable.gold_medal;
-	private static Integer silverMedal = R.drawable.silver_medal;
-	private static Integer[] tabbyDances = {R.drawable.tabby2,R.drawable.tabby3};
+	
+	/** if golden/silver is given. */
 	private boolean isSilverGiven = false, isGoldenGiven = false;
+	
+	/** The image resources for the star grid view. */
+	private Integer bgImage = R.drawable.question;
+	
+	/** The silver medal. */
+	private static Integer goldenStar = R.drawable.golden_star, silverStar = R.drawable.silver_star, defaultStar = R.drawable.default_star,
+			               nextSilverStar = R.drawable.next_silver_star, nextGoldenStar = R.drawable.next_golden_star, 
+			               goldMedal = R.drawable.gold_medal, silverMedal = R.drawable.silver_medal;
+	
+	/** The time spent on the recording. */
 	private Long spentTime = null;
+	
+	/** The reward sentences. */
 	private static String[] reward_names = { "Awesome!", "Excellent!", "Good!",
 			"Great work!", "Nice job!", "Super!" };
+	
+	/** The encouraging sentences. */
 	private static String[] encourage_names = { "So close!", "Try again :)", "Oooops!"};
+	
+	/** The reward_file_names. */
 	private static String[] reward_file_names = { "Awesome", "Excellent", "Good",
 		"greatwork", "nicejob", "Super" };
 	
 	
+	/** The lock. */
 	private static Object lock = new Object();
-	private Integer bgImage = R.drawable.question;
-
-	// ===============Variables for animation===================//
-	private Animation alphaAnimation;
-	private Animation scaleAnimation;
+	
+	/** The animations. */
+	private Animation alphaAnimation, scaleAnimation, flashAnimation;
+	
+	/** The animation set. */
 	private AnimationSet set;
-	Animation flashAnimation;
+	
+	/** The current view. */
 	private View currentView;
 
-	// ===============Variables for audio recording===================//
+	/** The buttons. */
 	private Button b_record, b_stop, b_play;
-	private Integer recordEn = R.drawable.recordv;
-	private Integer recordUn = R.drawable.recordh;
-	private Integer stopEn = R.drawable.stopv;
-	private Integer stopUn = R.drawable.stoph;
-	private Integer playEn = R.drawable.playv;
-	private Integer playUn = R.drawable.playh;
+	
+	/** The image resources for buttons. */
+	private Integer recordEn = R.drawable.recordv, recordUn = R.drawable.recordh, stopEn = R.drawable.stopv, 
+			stopUn = R.drawable.stoph, playEn = R.drawable.playv, playUn = R.drawable.playh;
+	
+	/** The state of the recording. */
 	private final int FREE = 0, READY_FOR_RECORD = 1, RECORDING = 2,
 			RECORD_END = 3, PLAYING = 4, PLAY_END = 5;
+	
+	/** The current state of the recording. */
 	private int state = FREE;
+	
+	/** The filename for the image. */
 	private String filename;
 
+	/** The recorder. */
 	private AudioRecorder recorder;
+	
+	/** The media player for the recording. */
 	private MediaPlayer mediaPlayer;
+	
+	/** The media player for the prompt. */
 	private MediaPlayer promptPlayer;
 	
+	/** The record timer. */
 	Timer recordTimer;
+	
+	/** The recording seconds. */
 	int recordingSeconds = 0;
+	
+	/** The toast. */
 	Toast toast;
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -171,6 +248,9 @@ public class GameActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -178,6 +258,9 @@ public class GameActivity extends Activity {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -198,6 +281,9 @@ public class GameActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * Initialize the views in the scene.
+	 */
 	private void setView() {
 		// TODO Auto-generated method stub
 		
@@ -231,6 +317,7 @@ public class GameActivity extends Activity {
 		
 		goldGV = (GridView) findViewById(R.id.goldGV);
 		silverGV = (GridView) findViewById(R.id.silverGV);
+		
 		/*
 		if(app.mode.equals("alone")){
 			goldGV.setBackgroundColor(Color.GRAY);
@@ -264,6 +351,9 @@ public class GameActivity extends Activity {
 		// cardHandler = new CardsHandler();
 	}
 
+	/**
+	 * Load cards in random order.
+	 */
 	private void loadCards() {
 		// TODO Auto-generated method stub
 		card1 = null;
@@ -341,6 +431,12 @@ public class GameActivity extends Activity {
 
 	}
 	
+	/**
+	 * Checks if the image is existed.
+	 *
+	 * @param name the name
+	 * @return true, if the image exists
+	 */
 	private boolean isExistImage(String name) {
 		// TODO Auto-generated method stub
 		InputStream in = null;
@@ -354,7 +450,12 @@ public class GameActivity extends Activity {
 		return true;
 	}
 
-	//FOR THE GAME
+	/**
+	 * Flip a image.
+	 *
+	 * @param id the id of the image to be flipped
+	 * @param view the view of the image to be flipped
+	 */
 	private void turn(int id, View view) {
 		if (card1 == null) {
 			card1 = new CardItem(id, view);
@@ -382,6 +483,9 @@ public class GameActivity extends Activity {
 		isSilverGiven = false;
 	}
 
+	/**
+	 * Show the image content.
+	 */
 	private void turnAround() {
 		// TODO Auto-generated method stub
 		ImageView image = (ImageView) currentView.findViewById(R.id.icon);
@@ -402,6 +506,9 @@ public class GameActivity extends Activity {
 		text.setText(image_names[current_position].split("\\.")[0].toString().toLowerCase());
 	}
 
+	/**
+	 * Check two images to see if they are the same.
+	 */
 	public void checkCards() {
 		// Log.i("card1", "" + cards_uid[card1.id]);
 		// Log.i("card2", "" + cards_uid[card2.id]);
@@ -438,7 +545,6 @@ public class GameActivity extends Activity {
 			try {
 				String text = "";
 				String rewardfile = "";
-				Integer tabbydance = -1;
 				if (count == 5) {
 					text = "applause";
 					rewardfile = "applause";
@@ -447,15 +553,8 @@ public class GameActivity extends Activity {
 					int t = r.nextInt(6);
 					text = reward_names[t];
 					rewardfile = reward_file_names[t];
-					int t1 = r.nextInt(2);
-					tabbydance = tabbyDances[t1];
 				}
 				tabbyTV.setText("Tabby says:" + "\n" + text + "!");
-				//tabbyGif = (GifView) findViewById(tabbydance);  
-				//tabbyGif.setGifImage(tabbydance);  
-				//tabbyGif.setShowDimension(300, 300);  
-				//tabbyGif.setGifImageType(GifImageType.COVER);  
-				//tabbyImage.setImageResource(tabbydance);
 				AssetFileDescriptor descriptor = getAssets().openFd(
 						"audio/" + rewardfile + ".mp3");
 				rewardPlayer.setDataSource(descriptor.getFileDescriptor(),
@@ -505,9 +604,10 @@ public class GameActivity extends Activity {
 		b_play.setClickable(true);
 	}
 
-	// FOR THE ANIMATION
+	/**
+	 * Initialize the animations.
+	 */
 	public void setAnimation() {
-		
 		flashAnimation = new AlphaAnimation(1, 0);
 	    flashAnimation.setDuration(400);
 	    flashAnimation.setInterpolator(new LinearInterpolator());
@@ -526,66 +626,51 @@ public class GameActivity extends Activity {
 		//set.setFillAfter(true);
 	}
 
-	@SuppressLint("DefaultLocale")
-	private final class SwapViews implements Runnable {
-		private final int mPosition;
-
-		public SwapViews(int position) {
-			mPosition = position;
-		}
-
-		@SuppressLint("DefaultLocale")
-		public void run() {
-			ImageView image = (ImageView) currentView.findViewById(R.id.icon);
-			TextView text = (TextView) currentView.findViewById(R.id.text);
-			text.setVisibility(View.VISIBLE);
-
-			InputStream in = null;
-			// Log.i("filename", "img/"+image_names[mPosition]);
-			String name = image_names[mPosition];
-			StringBuilder sb = new StringBuilder(name);
-			char c = sb.charAt(0);
-			if (Character.isLowerCase(c)) {
-				sb.setCharAt(0, Character.toUpperCase(c));
-				Log.i("new_name", sb.toString());
-			}
-			try {
-				in = getAssets().open("img/" + sb.toString());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			final Bitmap bitmap = BitmapFactory.decodeStream(in);
-			// Display image and text
-			image.setImageBitmap(bitmap);
-			text.setText(image_names[mPosition].split("\\.")[0].toString()
-					.toLowerCase());
-		}
-	}
-
-	// FOR THE IMAGE
+	
+	/**
+	 * The Class ImageAdapter for the game panel.
+	 */
 	static class ImageAdapter extends BaseAdapter {
+		
+		/** The m context. */
 		private Context mContext;
 
+		/**
+		 * Instantiates a new image adapter.
+		 *
+		 * @param context the context
+		 */
 		public ImageAdapter(Context context) {
 			this.mContext = context;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getCount()
+		 */
 		@Override
 		public int getCount() {
 			return image_names.length;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItem(int)
+		 */
 		@Override
 		public Object getItem(int position) {
 			return image_names[position];
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItemId(int)
+		 */
 		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
@@ -596,28 +681,50 @@ public class GameActivity extends Activity {
 		}
 	}
 
+	/**
+	 * The Class StarGVAdapter for the golden/silver star grid view.
+	 */
 	static class StarGVAdapter extends BaseAdapter {
+		
+		/** The m context. */
 		private Context mContext;
 
+		/**
+		 * Instantiates a new star gv adapter.
+		 *
+		 * @param context the context
+		 */
 		public StarGVAdapter(Context context) {
 			this.mContext = context;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getCount()
+		 */
 		@Override
 		public int getCount() {
 			return 20;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItem(int)
+		 */
 		@Override
 		public Object getItem(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItemId(int)
+		 */
 		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView star;
@@ -641,6 +748,7 @@ public class GameActivity extends Activity {
 		}
 	}
 
+	/** The recording grid listener. */
 	// EVENT LISTENERS
 	OnItemClickListener gridListener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -694,6 +802,7 @@ public class GameActivity extends Activity {
 		}
 	};
 
+	/** The golden star grid view listener. */
 	OnItemClickListener ggvListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -770,6 +879,7 @@ public class GameActivity extends Activity {
 		}
 	};
 
+	/** The silver grid view listener. */
 	OnItemClickListener sgvListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -851,6 +961,7 @@ public class GameActivity extends Activity {
 		}
 	};
 
+	/** The record button listener. */
 	android.view.View.OnClickListener b_recordListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View arg0) {
@@ -918,6 +1029,7 @@ public class GameActivity extends Activity {
 		}
 	};
 
+	/** The stop button listener. */
 	android.view.View.OnClickListener b_stopListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -970,6 +1082,7 @@ public class GameActivity extends Activity {
 		}
 	};
 
+	/** The play button listener. */
 	android.view.View.OnClickListener b_playListener = new android.view.View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -1013,6 +1126,7 @@ public class GameActivity extends Activity {
 		}
 	};
 
+	/** The completion listener for the recording. */
 	OnCompletionListener compListener = new OnCompletionListener() {
 		@Override
 		public void onCompletion(MediaPlayer arg0) {
@@ -1028,6 +1142,9 @@ public class GameActivity extends Activity {
 
 	};
 	
+	/**
+	 * Save upload URL for a recording.
+	 */
 	protected void saveUploadUrl() {
 		// TODO Auto-generated method stub
 		Log.i("current_position",current_position+"");
@@ -1044,6 +1161,11 @@ public class GameActivity extends Activity {
 		Log.i("Game upload url", saved.getString(filename, ""));
 	}
 
+	/**
+	 * Play prompt.
+	 *
+	 * @param position the position
+	 */
 	protected void playPrompt(int position) {
 		// TODO Auto-generated method stub
 		String iname = image_names[position].split("\\.")[0].toString();
@@ -1074,6 +1196,9 @@ public class GameActivity extends Activity {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -1091,10 +1216,16 @@ public class GameActivity extends Activity {
 	    return super.onKeyDown(keyCode, event);
 	}
 	
+	/**
+	 * Save start exercise time .
+	 */
 	private void startExerciseTime() {
 		start_time = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(Calendar.getInstance().getTime());
 	}
 	
+	/**
+	 * Save end exercise time, write to the log.
+	 */
 	private void saveExerciseTime() {
 		UsageLog exerciseLog = new UsageLog(app.username+"_"+"exercise.txt");
 		String end_time = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(Calendar.getInstance().getTime());

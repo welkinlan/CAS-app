@@ -1,3 +1,6 @@
+/*
+ * This activity shows the right panel (exercises) based on the course selected
+ */
 package com.cas.fragment;
 
 import java.text.SimpleDateFormat;
@@ -20,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+// TODO: Auto-generated Javadoc
 /**
  * An activity representing a single course detail screen. This activity is only
  * used on handset devices. On tablet-size devices, item details are presented
@@ -29,7 +33,13 @@ import android.widget.LinearLayout;
  * a {@link courseDetailFragment}.
  */
 public class courseDetailActivity extends FragmentActivity {
+	
+	/** The app. */
 	Globals app;
+	
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,6 +72,9 @@ public class courseDetailActivity extends FragmentActivity {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

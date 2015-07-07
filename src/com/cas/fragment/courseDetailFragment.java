@@ -1,3 +1,6 @@
+/*
+ * The fragment class for courseDetailActivity
+ */
 package com.cas.fragment;
 
 import java.util.ArrayList;
@@ -37,8 +40,7 @@ import com.cas.model.Module;
 import com.cas.model.User;
 import com.cas.utility.Globals;
 import com.example.cas.R;
-//import com.kilobolt.*;
-//import com.kilobolt.ZombieBird.MainActivity;
+// TODO: Auto-generated Javadoc
 
 /**
  * A fragment representing a single course detail screen. This fragment is
@@ -52,18 +54,34 @@ public class courseDetailFragment extends Fragment implements
 	 * represents.
 	 */
 	public static final String ARG_ITEM_ID = "item_id";
+	
+	/** The course list. */
 	public static ListView course_list;
+	
+	/** The instruction layout. */
 	public static LinearLayout hand_layout;
+	
+	/** The course adapter. */
 	private CourseDetailAdapter course_adapter;
+	
+	/** The current position. */
 	private int currentPosition = -1;
+	
+	/** The user. */
 	private static User user;
+	
+	/** The courses. */
 	private static ArrayList<Course> courses;
 
 	/**
 	 * The dummy content this fragment is presenting.
 	 */
 	private Course course;
+	
+	/** The mode private. */
 	int MODE_PRIVATE = 0;
+	
+	/** The golden star indicating the number of completions for the exercises. */
 	private static Integer goldenStar = R.drawable.golden_star;
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,6 +90,9 @@ public class courseDetailFragment extends Fragment implements
 	public courseDetailFragment() {
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,6 +109,9 @@ public class courseDetailFragment extends Fragment implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long arg3) {
@@ -96,6 +120,9 @@ public class courseDetailFragment extends Fragment implements
 		course_adapter.notifyDataSetChanged();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -123,43 +150,84 @@ public class courseDetailFragment extends Fragment implements
 	}
 
 	
+	/**
+	 * The custom CourseDetailAdapter for holding exercises.
+	 */
 	class CourseDetailAdapter extends BaseAdapter {
+		
+		/** The context. */
 		private Context context;
+		
+		/** The inflater. */
 		private LayoutInflater inflater;
+		
+		/** The exercises in this course */
 		private List<Module> course_modules;
 
+		/**
+		 * The Class ViewHolder.
+		 */
 		class ViewHolder {
+			
+			/** The exercise name. */
 			public TextView exerciseName;
-			//public TextView count;
+			
+			/** The number of completion times for the exercise. */
 			public TableLayout excerciseStars;
+			
+			/** The main linear layout. */
 			public LinearLayout linearLayout;
+			
+			/** The flash card linear layout. */
 			public LinearLayout viewLinearLayout;
+			
+			/** The memory game linear layout. */
 			public LinearLayout playLinearLayout;
-			public LinearLayout flappyLinearLayout;
 		}
 
+		/**
+		 * Instantiates a new course detail adapter.
+		 *
+		 * @param activity the activity
+		 * @param course_modules the course_modules
+		 */
 		public CourseDetailAdapter(Activity activity, List<Module> course_modules) {
 			this.context = activity;
 			this.course_modules = course_modules;
 			inflater = LayoutInflater.from(context);
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getCount()
+		 */
 		public int getCount() {
 			return course_modules.size();
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.BaseAdapter#getItemViewType(int)
+		 */
 		public int getItemViewType(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItem(int)
+		 */
 		public Object getItem(int arg0) {
 			return course_modules.get(arg0);
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItemId(int)
+		 */
 		public long getItemId(int position) {
 			return position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+		 */
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
 			ViewHolder holder = null;
@@ -278,25 +346,6 @@ public class courseDetailFragment extends Fragment implements
 								}
 							});
 				}
-				
-				/*
-				holder.flappyLinearLayout.setClickable(false);
-				holder.flappyLinearLayout.setBackgroundColor(Color.GRAY);
-				holder.flappyLinearLayout
-				.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent viewIntent = new Intent(getActivity(),
-								MainActivity.class);
-						viewIntent.putExtra("moduleObject", module); 
-						viewIntent.putExtra("userObject", user);
-						viewIntent.putExtra("courseObject", course);
-						startActivity(viewIntent);
-						currentPosition = -1;
-					}
-				});
-				*/
-
 			} else {
 				holder.linearLayout.setVisibility(View.GONE);
 				holder.viewLinearLayout.setClickable(false);
@@ -305,48 +354,4 @@ public class courseDetailFragment extends Fragment implements
 			return convertView;
 		}
 	}
-	
-	/*
-	static class StarAdapter extends BaseAdapter {
-		private Context mContext;
-		private int completed_times;
-
-		public StarAdapter(Context applicationContext, int mod_completed_times) {
-			// TODO Auto-generated constructor stub
-			this.mContext = applicationContext;
-			this.completed_times  =mod_completed_times;
-		}
-
-		@Override
-		public int getCount() {
-			return this.completed_times;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return position;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ImageView star;
-			if (convertView == null) {
-				star = new ImageView(mContext);
-				star.setImageResource(goldenStar);
-			} else {
-				star = (ImageView) convertView;
-			}
-			star.setClickable(false);
-			star.setPressed(false);
-			star.setEnabled(false);
-			return star;
-		}
-	}
-*/
-
 }

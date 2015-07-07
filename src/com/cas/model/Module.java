@@ -29,9 +29,16 @@ import org.json.JSONObject;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Module.
+ */
 public class Module implements Parcelable {
 	//private static Module instance;
 
+	/**
+	 * Instantiates a new module.
+	 */
 	public Module() {
 
 	}
@@ -47,114 +54,263 @@ public class Module implements Parcelable {
 //		return instance;
 //	}
 	
-	private int id;	
+	/** The id. */
+private int id;	
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(int id) {
        this.id = id;
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
     public int getId() {
        return id;
     }
 
+	/** The url. */
 	private String url;	
+	
+	/**
+	 * Sets the url.
+	 *
+	 * @param url the new url
+	 */
 	public void setUrl(String url) {
        this.url = url;
     }
 
+    /**
+     * Gets the url.
+     *
+     * @return the url
+     */
     public String getUrl() {
        return url;
     }
         
+    /** The name. */
     private String name;	
+	
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
        this.name = name;
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
        return name;
     }
     
+    /** The description. */
     private String description;	
+	
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the new description
+	 */
 	public void setDescription(String description) {
        this.description = description;
     }
 
+    /**
+     * Gets the description.
+     *
+     * @return the description
+     */
     public String getDescription() {
        return description;
     }
 	    
+    /** The visible. */
     private int visible;	
+	
+	/**
+	 * Sets the visible.
+	 *
+	 * @param visible the new visible
+	 */
 	public void setVisible(int visible) {
        this.visible = visible;
     }
 
+    /**
+     * Gets the visible.
+     *
+     * @return the visible
+     */
     public int getVisible() {
        return visible;
     }
         
+	/** The modicon. */
 	private String modicon;	
+	
+	/**
+	 * Sets the mod icon.
+	 *
+	 * @param modicon the new mod icon
+	 */
 	public void setModIcon(String modicon) {
 	   this.modicon = modicon;
 	}
 	
+	/**
+	 * Gets the mod icon.
+	 *
+	 * @return the mod icon
+	 */
 	public String getModIcon() {
 	   return modicon;
 	}
     
+    /** The modname. */
     private String modname;	
+	
+	/**
+	 * Sets the mod name.
+	 *
+	 * @param modname the new mod name
+	 */
 	public void setModName(String modname) {
        this.modname = modname;
     }
 
+    /**
+     * Gets the mod name.
+     *
+     * @return the mod name
+     */
     public String getModName() {
        return modname;
     }
     
+    /** The modplural. */
     private String modplural;	
+	
+	/**
+	 * Sets the mod plural.
+	 *
+	 * @param modplural the new mod plural
+	 */
 	public void setModPlural(String modplural) {
        this.modplural = modplural;
     }
 
+    /**
+     * Gets the mod plural.
+     *
+     * @return the mod plural
+     */
     public String getModPlural() {
        return modplural;
     }
     
+    /** The availablefrom. */
     private int availablefrom;	
+	
+	/**
+	 * Sets the available from.
+	 *
+	 * @param availablefrom the new available from
+	 */
 	public void setAvailableFrom(int availablefrom) {
        this.availablefrom = availablefrom;
     }
 
+    /**
+     * Gets the available from.
+     *
+     * @return the available from
+     */
     public int getAvailableFrom() {
        return availablefrom;
     }
     
+    /** The availableuntil. */
     private int availableuntil;	
+	
+	/**
+	 * Sets the available until.
+	 *
+	 * @param availableuntil the new available until
+	 */
 	public void setAvailableUntil(int availableuntil) {
        this.availableuntil = availableuntil;
     }
 
+    /**
+     * Gets the available until.
+     *
+     * @return the available until
+     */
     public int getAvailableUntil() {
        return availableuntil;
     }
     
+    /** The indent. */
     private int indent;	
+	
+	/**
+	 * Sets the indent.
+	 *
+	 * @param indent the new indent
+	 */
 	public void setIndent(int indent) {
        this.indent = indent;
     }
 
+    /**
+     * Gets the indent.
+     *
+     * @return the indent
+     */
     public int getIndent() {
        return indent;
     }
     
+    /** The contents. */
     private ArrayList<Content> contents = new ArrayList<Content>();	
+	
+	/**
+	 * Sets the contents.
+	 *
+	 * @param contents the new contents
+	 */
 	public void setContents(ArrayList<Content> contents) {
        this.contents = contents;
     }
 
+    /**
+     * Gets the contents.
+     *
+     * @return the contents
+     */
     public ArrayList<Content> getContents() {
        return contents;
     }
 
+    /**
+     * Populate module.
+     *
+     * @param jsonObject the json object
+     */
     public void populateModule(JSONObject jsonObject) {
     
     	    	 
@@ -217,11 +373,15 @@ public class Module implements Parcelable {
     
     /* everything below here is for implementing Parcelable */ 
 	 
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#describeContents()
+     */
     // 99.9% of the time you can just ignore this 
     public int describeContents() { 
         return 0; 
     } 
     
+ /** The Constant CREATOR. */
  // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods 
     public static final Parcelable.Creator<Module> CREATOR = new Parcelable.Creator<Module>() { 
         public Module createFromParcel(Parcel in) { 
@@ -233,6 +393,9 @@ public class Module implements Parcelable {
         } 
     }; 
  
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+     */
     // write your object's data to the passed-in Parcel 
     public void writeToParcel(Parcel dest, int flags) { 
     	dest.writeInt(id); 
@@ -249,6 +412,11 @@ public class Module implements Parcelable {
     	dest.writeTypedList(contents); 
     }
     
+    /**
+     * Instantiates a new module.
+     *
+     * @param in the in
+     */
     private Module(Parcel in) { 
         this.id = in.readInt(); 
         this.url = in.readString();

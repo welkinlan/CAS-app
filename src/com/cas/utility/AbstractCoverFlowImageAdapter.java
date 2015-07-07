@@ -1,3 +1,6 @@
+/*
+ * The utility adapter for flash cards list
+ */
 package com.cas.utility;
 
 import java.lang.ref.WeakReference;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class is an adapter that provides base, abstract class for images
  * adapter.
@@ -31,6 +35,9 @@ public abstract class AbstractCoverFlowImageAdapter extends BaseAdapter {
     /** The bitmap map. */
     private final Map<Integer, WeakReference<Bitmap>> bitmapMap = new HashMap<Integer, WeakReference<Bitmap>>();
 
+    /**
+     * Instantiates a new abstract cover flow image adapter.
+     */
     public AbstractCoverFlowImageAdapter() {
         super();
     }
@@ -55,6 +62,9 @@ public abstract class AbstractCoverFlowImageAdapter extends BaseAdapter {
         this.height = height;
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getItem(int)
+     */
     @Override
     public final Bitmap getItem(final int position) {
         final WeakReference<Bitmap> weakBitmapReference = bitmapMap.get(position);

@@ -1,3 +1,6 @@
+/*
+ * The helper class to download course contents from the server and upload recordings and session files to the server
+ */
 package com.cas.server;
 import java.io.File;
 import java.net.HttpURLConnection;
@@ -26,21 +29,53 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BackgroundSync.
+ */
 public class BackgroundSync {
 
+	/** The files. */
 	static File[] files;
+	
+	/** The download tag. */
 	static String DTAG = "DOWNLOAD_SYNC";
+	
+	/** The upload tag. */
 	static String UTAG = "UPLOAD_SYNC";
+	
+	/** The http connection. */
 	static HttpURLConnection up_conn = null;
+	
+	/** The username and the password. */
 	static String username, password;
+	
+	/** The mode for the shared preferences. */
 	final int MODE_PRIVATE = 0;
+	
+	/** The context. */
 	static Context context;
+	
+	/** The string formatter. */
 	StringHelper sh = new StringHelper();
+	
+	/** The saved information in the shared preferences. */
 	static SharedPreferences saved;
+	
+	/** The global applications. */
 	Globals app;
+	
+	/** The download done. */
 	public boolean downloadDone = false;
+	
+	/** The upload done. */
 	public boolean uploadDone = false;
 
+	/**
+	 * Instantiates a new background sync.
+	 *
+	 * @param c the c
+	 */
 	public BackgroundSync(Context c) {
 		app = ((Globals)c.getApplicationContext());
 		username = app.username;
@@ -49,6 +84,9 @@ public class BackgroundSync {
 		//saved = context.getSharedPreferences(username, MODE_PRIVATE);
 	}
 
+	/**
+	 * Download course contents.
+	 */
 	// Download
 	public void download() {
 		app.isDownloading=true;
@@ -103,6 +141,9 @@ public class BackgroundSync {
 
 	}
 
+	/**
+	 * Upload recordings and session files.
+	 */
 	public void upload() {
 		//upload session and exercise logs
 		Log.i(UTAG, "try upload sessions and exercises");
@@ -208,6 +249,11 @@ public class BackgroundSync {
 		}
 	}
 
+	/**
+	 * Move the uploaded files to another folder.
+	 *
+	 * @param filename the filename
+	 */
 	private void moveFile(String filename) {
 		// TODO Auto-generated method stub
 		// your sd card
@@ -228,6 +274,9 @@ public class BackgroundSync {
 		}
 	}
 
+	/**
+	 * Stop the synchronization.
+	 */
 	public void stop() {
 		app.isDownloading = false;
 		app.isUploading = false;

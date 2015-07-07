@@ -29,9 +29,16 @@ import org.json.JSONObject;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CourseContent.
+ */
 public class CourseContent implements Parcelable {
 	//private static CourseContent instance;
 
+	/**
+	 * Instantiates a new course content.
+	 */
 	public CourseContent() {
 
 	}
@@ -47,51 +54,116 @@ public class CourseContent implements Parcelable {
 //		return instance;
 //	}
 	
-	private int id;	
+	/** The id. */
+private int id;	
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(int id) {
        this.id = id;
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
     public int getId() {
        return id;
     }
         
+    /** The name. */
     private String name;	
+	
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
        this.name = name;
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
        return name;
     }
 	    
+    /** The visible. */
     private int visible;	
+	
+	/**
+	 * Sets the visible.
+	 *
+	 * @param visible the new visible
+	 */
 	public void setVisible(int visible) {
        this.visible = visible;
     }
 
+    /**
+     * Gets the visible.
+     *
+     * @return the visible
+     */
     public int getVisible() {
        return visible;
     }
         
+	/** The summary. */
 	private String summary;	
+	
+	/**
+	 * Sets the summary.
+	 *
+	 * @param summary the new summary
+	 */
 	public void setSummary(String summary) {
 	   this.summary = summary;
 	}
 	
+	/**
+	 * Gets the summary.
+	 *
+	 * @return the summary
+	 */
 	public String getSummary() {
 	   return summary;
 	}
     
+    /** The modules. */
     private ArrayList<Module> modules = new ArrayList<Module>();	
+	
+	/**
+	 * Sets the modules.
+	 *
+	 * @param modules the new modules
+	 */
 	public void setModules(ArrayList<Module> modules) {
        this.modules = modules;
     }
 
+    /**
+     * Gets the modules.
+     *
+     * @return the modules
+     */
     public ArrayList<Module> getModules() {
        return modules;
     }
 
+    /**
+     * Populate course content.
+     *
+     * @param jsonObject the json object
+     */
     public void populateCourseContent(JSONObject jsonObject) { 	    	 
     	try {  
     		if (jsonObject != null) {
@@ -131,11 +203,15 @@ public class CourseContent implements Parcelable {
     
     /* everything below here is for implementing Parcelable */ 
 	 
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#describeContents()
+     */
     // 99.9% of the time you can just ignore this 
     public int describeContents() { 
         return 0; 
     } 
     
+ /** The Constant CREATOR. */
  // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods 
     public static final Parcelable.Creator<CourseContent> CREATOR = new Parcelable.Creator<CourseContent>() { 
         public CourseContent createFromParcel(Parcel in) { 
@@ -147,6 +223,9 @@ public class CourseContent implements Parcelable {
         } 
     }; 
  
+    /* (non-Javadoc)
+     * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+     */
     // write your object's data to the passed-in Parcel 
     public void writeToParcel(Parcel dest, int flags) { 
     	dest.writeInt(id);
@@ -156,6 +235,11 @@ public class CourseContent implements Parcelable {
     	dest.writeTypedList(modules); 
     }
     
+    /**
+     * Instantiates a new course content.
+     *
+     * @param in the in
+     */
     private CourseContent(Parcel in) { 
         this.id = in.readInt();
         this.name = in.readString();

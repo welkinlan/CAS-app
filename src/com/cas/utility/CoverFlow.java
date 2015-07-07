@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.cas.utility;
 
 import com.example.cas.R;
@@ -13,6 +16,10 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.SpinnerAdapter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CoverFlow.
+ */
 @SuppressWarnings("deprecation")
 public class CoverFlow extends Gallery {
 
@@ -146,15 +153,33 @@ public class CoverFlow extends Gallery {
         return imageReflectionRatio;
     }
 
+    /**
+     * Instantiates a new cover flow.
+     *
+     * @param context the context
+     */
     public CoverFlow(final Context context) {
         super(context);
         this.setStaticTransformationsEnabled(true);
     }
 
+    /**
+     * Instantiates a new cover flow.
+     *
+     * @param context the context
+     * @param attrs the attrs
+     */
     public CoverFlow(final Context context, final AttributeSet attrs) {
         this(context, attrs, android.R.attr.galleryStyle);
     }
 
+    /**
+     * Instantiates a new cover flow.
+     *
+     * @param context the context
+     * @param attrs the attrs
+     * @param defStyle the def style
+     */
     public CoverFlow(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         parseAttributes(context, attrs);
@@ -237,7 +262,8 @@ public class CoverFlow extends Gallery {
 
     /**
      * Get the Centre of the View.
-     * 
+     *
+     * @param view the view
      * @return The centre of the given view.
      */
     private static int getCenterOfView(final View view) {
@@ -294,13 +320,10 @@ public class CoverFlow extends Gallery {
 
     /**
      * Transform the Image Bitmap by the Angle passed.
-     * 
-     * @param imageView
-     *            ImageView the ImageView whose bitmap we want to rotate
-     * @param t
-     *            transformation
-     * @param rotationAngle
-     *            the Angle by which to rotate the Bitmap
+     *
+     * @param child the child
+     * @param t            transformation
+     * @param rotationAngle            the Angle by which to rotate the Bitmap
      */
     private void transformImageBitmap(final ImageView child, final Transformation t, final int rotationAngle) {
         mCamera.save();
